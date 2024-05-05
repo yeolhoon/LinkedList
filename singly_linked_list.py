@@ -168,8 +168,6 @@ class singly_linked_list:
         print("No node with data {} found.".format(cur_data))
         return
 
-
-
     def main(self):
         self.display()
         self.append(1)
