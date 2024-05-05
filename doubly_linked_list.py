@@ -19,6 +19,7 @@ class doubly_linked_list:
             self.tail.next = new_node
             new_node.prev = self.tail
             self.tail = new_node
+        return None
 
     def prepend(self, data):
         new_node = node(data)
@@ -29,6 +30,7 @@ class doubly_linked_list:
             self.head.prev = new_node
             new_node.next = self.head
             self.head = new_node
+        return None
 
     def length(self):
         cur = self.head
@@ -45,6 +47,7 @@ class doubly_linked_list:
             elements.append(str(cur_node.data))
             cur_node = cur_node.next
         print(" <-> ".join(elements))
+        return None
 
     def display_reverse(self):
         elements = []
@@ -53,6 +56,7 @@ class doubly_linked_list:
             elements.append(str(cur_node.data))
             cur_node = cur_node.prev
         print(" <-> ".join(elements))
+        return None
 
     def get(self, index):
         if index >= self.length():
@@ -71,18 +75,36 @@ class doubly_linked_list:
         cur_node = self.head
         while cur_node:
             if cur_node.data == data:
-                print("data : {0} index : {1}".format(data, cur_index))
+                print(f"data : {data} index : {cur_index}")
                 return
+    def get(self, index):
+        if index >= self.length():
+            print("ERROR: 'Get' Index out of range!")
+            return None
+        cur_index = 0
+        cur_node = self.head
+        while cur_node:
+            if cur_index == index:
+                return cur_node.data
             cur_node = cur_node.next
             cur_index += 1
 
-        print("there is no data about {}".format(data))
-        return
+    def get_data(self, data):
+        cur_index = 0
+        cur_node = self.head
+        while cur_node:
+            if cur_node.data == data:
+                print(f"data : {data} index : {cur_index}")
+                return cur_node.data, cur_index
+            cur_node = cur_node.next
+            cur_index += 1
+
+        raise ValueError(f"Data {data} not found in the list.")
 
     def erase(self, index):
         if index >= self.length():
             print("ERROR: 'Erase' Index out of range!")
-            return
+            return None
         cur_node = self.head
         cur_index = 0
         while cur_node:
@@ -99,7 +121,7 @@ class doubly_linked_list:
                     self.tail = cur_node.prev
                     if self.tail:
                         self.tail.next = None
-                return
+                return None
             cur_node = cur_node.next
             cur_index += 1
 
@@ -108,8 +130,8 @@ class doubly_linked_list:
         while cur_node:
             if cur_node.data == cur_data:
                 if cur_node.prev is None:
-                    print("No previous node exists for the first node with data '{}'.".format(cur_data))
-                    return
+                    print(f"No previous node exists for the first node with data {cur_data}.")
+                    return None
 
                 deleted_node = cur_node.prev
                 if deleted_node:
@@ -118,18 +140,18 @@ class doubly_linked_list:
                     else:
                         self.head = cur_node
                     cur_node.prev = deleted_node.prev
-                    return
+                    return None
             cur_node = cur_node.next
-        print("No node with data '{}' found.".format(cur_data))
-        return
+        print(f"No node with data {cur_data} found.")
+        return None
 
     def erase_next(self, cur_data):
         cur_node = self.head
         while cur_node:
             if cur_node.data == cur_data:
                 if cur_node.next is None:
-                    print("No next node exists for the last node with data '{}'.".format(cur_data))
-                    return
+                    print(f"No next node exists for the last node with data {cur_data}.")
+                    return None
                 else:
                     deleted_node = cur_node.next
                     if deleted_node.next:
@@ -137,9 +159,10 @@ class doubly_linked_list:
                     cur_node.next = deleted_node.next
                     if deleted_node == self.tail:
                         self.tail = cur_node
-                    return
+                    return None
             cur_node = cur_node.next
-        print("No node with data '{}' found.".format(cur_data))
+        print(f"No node with data {cur_data} found.")
+        return None
 
     def insert_next(self, cur_data, new_data):
         cur_node = self.head
@@ -153,9 +176,10 @@ class doubly_linked_list:
                     self.tail = new_node
                 new_node.prev = cur_node
                 cur_node.next = new_node
-                return
+                return None
             cur_node = cur_node.next
-        print("No node with data '{}' found.".format(cur_data))
+        print(f"No node with data {cur_data} found.")
+        return None
 
     def insert_prev(self, cur_data, new_data):
         cur_node = self.head
@@ -169,9 +193,10 @@ class doubly_linked_list:
                     self.head = new_node
                 new_node.next = cur_node
                 cur_node.prev = new_node
-                return
+                return None
             cur_node = cur_node.next
-        print("No node with data '{}' found.".format(cur_data))
+        print(f"No node with data {cur_data} found.")
+        return None
 
     def main(self):
         self.append(1)
@@ -190,6 +215,11 @@ class doubly_linked_list:
         self.insert_prev(1, "b")
         self.insert_next(1, 4)
         self.display()
+        try:
+            data, index = self.get_data('b')
+            print(f"Data: {data}, Index: {index}")
+        except ValueError as err:
+            print(err)
 
 
 test_list = doubly_linked_list()
