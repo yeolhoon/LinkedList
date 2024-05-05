@@ -141,6 +141,38 @@ class doubly_linked_list:
             cur_node = cur_node.next
         print("No node with data '{}' found.".format(cur_data))
 
+    def insert_next(self, cur_data, new_data):
+        cur_node = self.head
+        while cur_node:
+            if cur_node.data == cur_data:
+                new_node = node(new_data)
+                if cur_node.next:
+                    new_node.next = cur_node.next
+                    cur_node.next.prev = new_node
+                else:
+                    self.tail = new_node
+                new_node.prev = cur_node
+                cur_node.next = new_node
+                return
+            cur_node = cur_node.next
+        print("No node with data '{}' found.".format(cur_data))
+
+    def insert_prev(self, cur_data, new_data):
+        cur_node = self.head
+        while cur_node:
+            if cur_node.data == cur_data:
+                new_node = node(new_data)
+                if cur_node.prev:
+                    new_node.prev = cur_node.prev
+                    cur_node.prev.next = new_node
+                else:
+                    self.head = new_node
+                new_node.next = cur_node
+                cur_node.prev = new_node
+                return
+            cur_node = cur_node.next
+        print("No node with data '{}' found.".format(cur_data))
+
     def main(self):
         self.append(1)
         self.append(4)
@@ -149,11 +181,14 @@ class doubly_linked_list:
         self.display_reverse()
         self.prepend("b")
         self.display()
-        self.erase_prev('b')
-        self.erase_next('a')
+        self.erase_prev("b")
+        self.erase_next("a")
         self.display()
         self.erase_prev(1)
         self.erase_next(1)
+        self.display()
+        self.insert_prev(1, "b")
+        self.insert_next(1, 4)
         self.display()
 
 
