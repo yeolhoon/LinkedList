@@ -17,12 +17,14 @@ class singly_linked_list:
             while cur.next:
                 cur = cur.next
             cur.next = new_node
+        return None
 
     def prepend(self, data):
         new_node = node(data)
         cur = self.head
         self.head = new_node
         new_node.next = cur
+        return None
 
     def length(self):
         cur = self.head
@@ -39,6 +41,7 @@ class singly_linked_list:
             elements.append(str(cur_node.data))
             cur_node = cur_node.next
         print(" -> ".join(elements))
+        return None
 
     def get(self, index):
         if index >= self.length():
@@ -57,29 +60,27 @@ class singly_linked_list:
         cur_node = self.head
         while cur_node:
             if cur_node.data == data:
-                print("data : {0} index : {1}".format(data, cur_index))
-                return
+                return cur_node.data, cur_index
             cur_node = cur_node.next
             cur_index += 1
 
-        print("there is no data about {}".format(data))
-        return
+        raise ValueError(f"Data {data} not found in the list.")
 
     def erase(self, index):
         if index >= self.length():
             print("ERROR: 'Erase' Index out of range!")
-            return
+            return None
 
         if index == 0:
             self.head = self.head.next
-            return
+            return None
 
         cur_index = 0
         cur_node = self.head
         while cur_node:
             if cur_index == index - 1:
                 cur_node.next = cur_node.next.next
-                return
+                return None
             cur_node = cur_node.next
             cur_index += 1
 
@@ -93,15 +94,15 @@ class singly_linked_list:
                         self.head = cur_node
                     else:
                         prev_node.next = cur_node.next
-                    return
+                    return None
                 else:
                     print("Cannot erase previous node.")
-                    return
+                    return None
             prev_node = cur_node
             cur_node = cur_node.next
 
-        print("No node with data '{}' found.".format(cur_data))
-        return
+        print(f"No node with data {cur_data} found.")
+        return None
 
     def erase_next(self, cur_data):
         cur_node = self.head
@@ -109,14 +110,14 @@ class singly_linked_list:
             if cur_node.data == cur_data:
                 if cur_node.next:
                     cur_node.next = cur_node.next.next
-                    return
+                    return None
                 else:
                     print("Cannot erase next node.")
-                    return
+                    return None
             cur_node = cur_node.next
 
-        print("No node with data '{}' found.".format(cur_data))
-        return
+        print(f"No node with data {cur_data} found.")
+        return None
 
     def insert(self, index, insert_data):
         if index >= self.length():
@@ -124,7 +125,7 @@ class singly_linked_list:
             return None
         if index == 0:
             self.prepend(insert_data)
-            return
+            return None
         new_node = node(insert_data)
         cur_node = self.head
         cur_index = 0
@@ -133,7 +134,7 @@ class singly_linked_list:
             if cur_index == index:
                 prev_node.next = new_node
                 new_node.next = cur_node
-                return
+                return None
             prev_node = cur_node
             cur_node = cur_node.next
             cur_index += 1
@@ -149,12 +150,12 @@ class singly_linked_list:
                     prev_node.next = new_node
                 else:
                     self.head = new_node
-                return
+                return None
             prev_node = cur_node
             cur_node = cur_node.next
 
-        print("No node with data {} found.".format(cur_data))
-        return
+        print(f"No node with data {cur_data} found.")
+        return None
 
     def insert_next(self, cur_data, insert_data):
         new_node = node(insert_data)
@@ -163,10 +164,10 @@ class singly_linked_list:
             if cur_node.data == cur_data:
                 new_node.next = cur_node.next
                 cur_node.next = new_node
-                return
+                return None
             cur_node = cur_node.next
-        print("No node with data {} found.".format(cur_data))
-        return
+        print(f"No node with data {cur_data} found.")
+        return None
 
     def main(self):
         self.display()
@@ -184,7 +185,11 @@ class singly_linked_list:
         self.erase_next(10)
         self.erase_prev(10)
         self.display()
-
+        try:
+            data, index = self.get_data('a')
+            print(f"Data: {data}, Index: {index}")
+        except ValueError as err:
+            print(err)
 
 test_list = singly_linked_list()
 test_list.main()
