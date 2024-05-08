@@ -72,15 +72,17 @@ class singly_linked_list:
             return None
 
         if index == 0:
+            erased_node = self.head
             self.head = self.head.next
-            return None
+            return erased_node, index
 
         cur_index = 0
         cur_node = self.head
         while cur_node:
             if cur_index == index - 1:
+                erased_node = cur_node.next
                 cur_node.next = cur_node.next.next
-                return None
+                return erased_node, index
             cur_node = cur_node.next
             cur_index += 1
 
@@ -184,6 +186,9 @@ class singly_linked_list:
         self.display()
         self.erase_next(10)
         self.erase_prev(10)
+        self.display()
+        erased_node, index = self.erase(2)
+        print(f"Index : {index} Data : {erased_node.data} has been removed")
         self.display()
         try:
             data, index = self.get_data('a')
