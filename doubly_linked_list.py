@@ -197,6 +197,7 @@ class doubly_linked_list:
         print(f"No node with data {cur_data} found.")
         return None
 
+
 def main():
     test_list = doubly_linked_list()
     test_list.append(1)
