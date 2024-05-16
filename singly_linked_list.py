@@ -171,30 +171,31 @@ class singly_linked_list:
         print(f"No node with data {cur_data} found.")
         return None
 
-    def main(self):
-        self.display()
-        self.append(1)
-        self.append(4)
-        self.append("a")
-        self.display()
-        "erase 1 index "
-        self.prepend(5)
-        self.get_data("a")
-        self.insert_prev(1, 3)
-        self.insert_next(1, 8)
-        self.insert(1, 10)
-        self.display()
-        self.erase_next(10)
-        self.erase_prev(10)
-        self.display()
-        erased_node, index = self.erase(2)
-        print(f"Index : {index} Data : {erased_node.data} has been removed")
-        self.display()
-        try:
-            data, index = self.get_data('a')
-            print(f"Data: {data}, Index: {index}")
-        except ValueError as err:
-            print(err)
+def main():
+    test_list = singly_linked_list()
+    test_list.display()
+    test_list.append(1)
+    test_list.append(4)
+    test_list.append("a")
+    test_list.display()
+    "erase 1 index "
+    test_list.prepend(5)
+    test_list.get_data("a")
+    test_list.insert_prev(1, 3)
+    test_list.insert_next(1, 8)
+    test_list.insert(1, 10)
+    test_list.display()
+    test_list.erase_next(10)
+    test_list.erase_prev(10)
+    test_list.display()
+    erased_node, index = test_list.erase(2)
+    print(f"Index : {index} Data : {erased_node.data} has been removed")
+    test_list.display()
+    try:
+        data, index = test_list.get_data('a')
+        print(f"Data: {data}, Index: {index}")
+    except ValueError as err:
+        print(err)
 
-test_list = singly_linked_list()
-test_list.main()
+
+main()

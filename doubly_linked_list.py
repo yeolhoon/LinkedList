@@ -98,7 +98,6 @@ class doubly_linked_list:
                 return cur_node.data, cur_index
             cur_node = cur_node.next
             cur_index += 1
-
         raise ValueError(f"Data {data} not found in the list.")
 
     def erase(self, index):
@@ -198,29 +197,29 @@ class doubly_linked_list:
         print(f"No node with data {cur_data} found.")
         return None
 
-    def main(self):
-        self.append(1)
-        self.append(4)
-        self.append("a")
-        self.display()
-        self.display_reverse()
-        self.prepend("b")
-        self.display()
-        self.erase_prev("b")
-        self.erase_next("a")
-        self.display()
-        self.erase_prev(1)
-        self.erase_next(1)
-        self.display()
-        self.insert_prev(1, "b")
-        self.insert_next(1, 4)
-        self.display()
-        try:
-            data, index = self.get_data('b')
-            print(f"Data: {data}, Index: {index}")
-        except ValueError as err:
-            print(err)
+def main():
+    test_list = doubly_linked_list()
+    test_list.append(1)
+    test_list.append(4)
+    test_list.append("a")
+    test_list.display()
+    test_list.display_reverse()
+    test_list.prepend("b")
+    test_list.display()
+    test_list.erase_prev("b")
+    test_list.erase_next("a")
+    test_list.display()
+    test_list.erase_prev(1)
+    test_list.erase_next(1)
+    test_list.display()
+    test_list.insert_prev(1, "b")
+    test_list.insert_next(1, 4)
+    test_list.display()
+    try:
+        data, index = test_list.get_data('b')
+        print(f"Data: {data}, Index: {index}")
+    except ValueError as err:
+        print(err)
 
 
-test_list = doubly_linked_list()
-test_list.main()
+main()
